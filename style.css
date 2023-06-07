@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url('./assets/images/space.gif');
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+#sound_value {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    cursor: pointer;
+}
+.sound_value_on {
+    width: 50px;
+    height: 50px;
+    background: url('./assets/images/on.png');
+    background-size: cover;
+}
+.sound_value_off {
+    width: 50px;
+    height: 50px;
+    background: url('./assets/images/off.png');
+    background-size: cover;
+}
+#btn_start {
+    position: absolute;
+    cursor: pointer;
+    width: 260px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 27px;
+    color: rgba(38, 35, 35, 0.8);
+    background: rgba(174, 245, 131, 0.8);
+    font-size: 36px;
+    top: calc(50% + 30px);
+    left: calc(50% - 130px);
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
+    box-shadow: 0 3px 6px 2px rgba(228, 229, 230, 0.35);
+}
+#space_ship {
+    position: absolute;
+    bottom: -10px;
+    left: calc(50% - 160px);
+    width: 320px;
+    height: 160px;
+    background: url('./assets/images/spaceship.png');
+    background-size: cover;
+}
+#value {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 25px;
+    width: 80px;
+    border-radius: 10px;
+    border: 1px solid white;
+    padding: 6px 10px;
+    color: white;
+    font-size: 24px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+#value__donuts {
+    width: 24px;
+    height: 25px;
+    background: url('./assets/images/donut.png');
+    background-size: cover;
+}
+#boom {
+    display: none;
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    background: url('./assets/images/boom.gif');
+    background-size: cover;
+}
+#game_over {
+    display: none;
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    top: calc(50% - 220px);
+    left: calc(50% - 105px);
+    background: url('./assets/images/sad_M.png');
+    background-size: cover;
+}
