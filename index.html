@@ -10,13 +10,91 @@
         <title>Space Trip</title>
     </head>
     <body>
+    <div style="height: 100%; display: flex; justify-content: center; align-items: center">
+<!--        <button type="button" onclick="send()">Отправить</button>-->
+    </div>
 
-        <audio autoplay id="audio" src="./assets/sounds/R&M_theme.mp3"></audio>
-        <canvas id="canvas"></canvas>
-        <script src="./scripts/main.js"></script>
-        <script src="./scripts/helpers.js"></script>
-        <script src="./scripts/components.js"></script>
-        <script src="./scripts/generators.js"></script>
-        <script src="./scripts/loop.js"></script>
+<!--
+         blob (Binary large object)
+         хранит содержимое фалов
+         не хранит название или дату, а только контент в бинарном виде
+
+-->
+
+    <script type="module">
+      import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
+
+      const octokit = new Octokit({ auth: `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` });
+
+      const master = {
+        sha: "",
+        tree: {
+          sha: "",
+          tree: {
+            sha: ""
+          }
+        }
+      }
+
+      // get the head of the master branch
+      const { data: { object } } = await octokit.request('GET /repos/MuradKurbanov/SpaceTrip/git/refs/heads/master');
+      master.sha = object['sha']
+
+      // get the last commit
+      const { data: { tree } } = await octokit.request(`GET /repos/MuradKurbanov/SpaceTrip/git/commits/${master.sha}`);
+      master.tree.sha = tree['sha']
+
+      // add blob to tree
+      const { data: { sha } } = await octokit.request(`POST /repos/MuradKurbanov/SpaceTrip/git/trees`, {
+        base_tree: master.tree.sha,
+        tree: [
+          {
+            path: 'file.md',
+            mode: '100644',
+            type: 'blob',
+            content: 'Hello world!',
+          }
+        ]
+      });
+      master.tree.tree.sha = sha
+
+      // create commit for new blob
+      const commit = await octokit.request(`POST /repos/MuradKurbanov/SpaceTrip/git/commits`, {
+        message: 'my commit message3',
+        tree: master.tree.tree.sha
+      });
+
+      // update branch
+      await octokit.request('PATCH /repos/MuradKurbanov/SpaceTrip/git/refs/heads/master', {
+        sha: commit.data['sha'],
+        force: false,
+      })
+
+        // {
+        //     owner: 'MuradKurbanov',
+        //     repo: 'SpaceTrip',
+        //     ref: 'refs/heads/master',
+        //     // headers: {
+        //     //   'X-GitHub-Api-Version': '2022-11-28'
+        //     // }
+        // }
+
+      // const response = await octokit.request("GET refs/heads/master", {
+      //   org: "SpaceTrip",
+      //   type: "public",
+      // });
+      // console.log(response, 'response')
+
+      //username: "MuradKurbanov",
+      // password: "russiaDeveloper92"
+    </script>
+
+<!--        <audio autoplay id="audio" src="./assets/sounds/R&M_theme.mp3"></audio>-->
+<!--        <canvas id="canvas"></canvas>-->
+<!--        <script src="./scripts/main.js"></script>-->
+<!--        <script src="./scripts/helpers.js"></script>-->
+<!--        <script src="./scripts/components.js"></script>-->
+<!--        <script src="./scripts/generators.js"></script>-->
+<!--        <script src="./scripts/loop.js"></script>-->
     </body>
 </html>
