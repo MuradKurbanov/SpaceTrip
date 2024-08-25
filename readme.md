@@ -18,3 +18,6 @@ https://muradkurbanov.github.io/SpaceTrip/
 **Grab object** : space
 
 
+![Пример изображения](assets/images/screen.png)
+
+
