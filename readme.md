@@ -1,4 +1,4 @@
-https://muradkurbanov.github.io/SpaceTrip/
+https://muradkurbanov.github.io/SpaceTrip
 
 
 ### Spaceship control
